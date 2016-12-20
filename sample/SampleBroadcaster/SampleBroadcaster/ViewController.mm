@@ -24,7 +24,7 @@
  */
 
 #import "ViewController.h"
-#import "VCSimpleSession.h"
+#import <videocore/Apple/iOS/api/VCSimpleSession.h>
 
 @interface ViewController () <VCSessionDelegate> {
 

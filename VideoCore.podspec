@@ -18,44 +18,31 @@ Pod::Spec.new do |s|
   s.header_dir          = 'videocore'
   s.header_mappings_dir = 'videocore'
 
-  s.source_files        = [ 'mixers/**/*.h*', 'mixers/**/*.cpp', 'mixers/**/*.m*', 
-                            'rtmp/**/*.h*', 'rtmp/**/*.cpp', 'rtmp/**/*.m*',
-                            'sources/**/*.h*', 'sources/**/*.cpp', 'sources/**/*.m*',
-                            'stream/**/*.h*', 'stream/**/*.cpp', 'stream/**/*.m*',
-                            'system/**/*.h*', 'system/**/*.cpp', 'system/**/*.m*',
-                            'transforms/**/*.h*', 'transforms/**/*.cpp', 'transforms/**/*.m*',
-                            'api/**/*.h*', 'api/**/*.m*',
-                            'filters/**/*.cpp', 'filters/**/*.h*' ]
+  s.source_files        = [ 'videocore/Shared/**/*.h*', 'videocore/Shared/**/*.cpp',
+                            'videocore/Apple/Shared/**/*.h*', 'videocore/Apple/Shared/**/*.cpp', 'videocore/Apple/Shared/**/*.m*',
+                            'videocore/Apple/iOS/**/*.h*', 'videocore/Apple/iOS/**/*.cpp', 'videocore/Apple/iOS/**/*.m*']
 
   s.frameworks          = [ 'VideoToolbox', 'AudioToolbox', 'AVFoundation', 'CFNetwork', 'CoreMedia',
                             'CoreVideo', 'OpenGLES', 'Foundation', 'CoreGraphics' ]
 
   s.libraries           = 'c++'
 
-  s.dependency          'boost', '~> 1.51.0'
   s.dependency          'glm'
   s.dependency          'UriParser-cpp', '~> 0.1.3'
-  
-  s.xcconfig            = { "HEADER_SEARCH_PATHS" => "${PODS_ROOT}/boost" }
 
-  s.ios.deployment_target = '5.0'
+  s.ios.deployment_target = '8.0'
 
   # Before we can get OS X deployment working, we'll need to use sub-specs to
   # separate out the source files for OS X vs. iOS
   #s.osx.deployment_target = '10.7'
 
-  s.subspec 'Swift' do |swift|
-    swift.public_header_files = 'videocore/api/**/*.h'
-    swift.source_files        = [ 'videocore/mixers/**/*.h*', 'videocore/mixers/**/*.cpp', 'videocore/mixers/**/*.m*', 
-                            'videocore/rtmp/**/*.h*', 'videocore/rtmp/**/*.cpp', 'videocore/rtmp/**/*.m*',
-                            'videocore/sources/**/*.h*', 'videocore/sources/**/*.cpp', 'videocore/sources/**/*.m*',
-                            'videocore/stream/**/*.h*', 'videocore/stream/**/*.cpp', 'videocore/stream/**/*.m*',
-                            'videocore/system/**/*.h*', 'videocore/system/**/*.cpp', 'videocore/system/**/*.m*',
-                            'videocore/transforms/**/*.h*', 'videocore/transforms/**/*.cpp', 'videocore/transforms/**/*.m*',
-                            'videocore/api/**/*.h*', 'videocore/api/**/*.m*',
-                            'videocore/filters/**/*.cpp', 'videocore/filters/**/*.h*' ]
-	swift.xcconfig            = { "HEADER_SEARCH_PATHS" => "${PODS_ROOT}/VideoCore" }
-    swift.ios.deployment_target = '8.0'
-  end
+  # s.subspec 'Swift' do |swift|
+  #   swift.public_header_files = 'videocore/Apple/iOS/api/**/*.h'
+  #   swift.source_files        = [ 'videocore/Shared/**/*.h*', 'videcocore/Shared/**/*.cpp',
+  #                           'videocore/Apple/Shared/**/*.h*', 'videocore/Apple/Shared/**/*.cpp', 'videocore/Apple/Shared/**/*.m*',
+  #                           'videocore/Apple/iOS/**/*.h*', 'videocore/Apple/iOS/**/*.cpp', 'videocore/Apple/iOS/**/*.m*']
+  #   swift.xcconfig            = { "HEADER_SEARCH_PATHS" => "${PODS_ROOT}/VideoCore" }
+  #   swift.ios.deployment_target = '8.0'
+  # end
 
 end
