@@ -71,9 +71,29 @@
         case VCSessionStateNone:
         case VCSessionStatePreviewStarted:
         case VCSessionStateEnded:
-        case VCSessionStateError:
-            [_session startRtmpSessionWithURL:@"rtmp://192.168.50.19/myapp" andStreamKey:@"iosstream?abc=xxx"];
+        case VCSessionStateError: {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Server address" message:@"Enter server address" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.text = @"rtmp://192.168.50.19/myapp";
+            }];
+            
+            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.text = @"iosstream?abc=xxx";
+            }];
+            
+            
+            UIAlertController *blockCont = [alert retain];
+            [alert addAction:[UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [_session startRtmpSessionWithURL:[[blockCont textFields] objectAtIndex:0].text andStreamKey:[[blockCont textFields] objectAtIndex:1].text];
+                
+            }]];
+            [self presentViewController:alert animated:YES completion:^{
+                [blockCont release];
+            }];
+            
             break;
+        }
+            
         default:
             [_session endRtmpSession];
             break;
